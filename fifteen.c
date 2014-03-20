@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 
 // board's minimal dimension
 #define MIN 3
@@ -131,7 +132,15 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+    // create 2D array of (d^2-1) tiles in order from highest to lowest
+    for(int i = 0; i < d; i++)
+    {
+        for(int j = 0; j < d; j++)
+        {
+            board[i][j] = (d * d - 1) - j - (i * d);
+            printf("board[%i][%i] = %i\n", i, j, board[i][j]);
+        }
+    }
 }
 
 /**
