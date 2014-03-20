@@ -186,8 +186,34 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // TODO
+    // Remember location of blank tile
+    int* blank;
+    for (int i = 0; i < d; i++)
+    {
+        for(int j = 0; j < d; j++)
+        {
+            if(board[i][j] == 0)
+            {
+                blank = &board[i][j];
+            }
+        }
+    }
+    
+    // Search for tile's position
+    
+    // if tile is above empty, return true
+    
+    // if tile is below empty, return true
+    
+    // if tile is left of empty, return true
+    
+    // if tile is right of empty, return true
+    
+    // else return false
+    // else
     return false;
+    
+    // remember location of blank tile at end
 }
 
 /**
