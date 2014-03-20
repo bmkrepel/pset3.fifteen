@@ -163,7 +163,16 @@ void swap(int* a, int* b)
  */
 void draw(void)
 {
-    // TODO
+    // Draw board with 'd' columns and rows
+    for(int i = 0; i < d; i++)
+    {
+        for(int j = 0; j < d; j++)
+        {
+            printf("%2i  ", board[i][j]);
+        }
+
+        printf("\n");
+    }
 }
 
 /**
