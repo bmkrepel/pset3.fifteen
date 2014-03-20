@@ -187,14 +187,16 @@ void draw(void)
 bool move(int tile)
 {
     // Remember location of blank tile
-    int* blank;
+    int x;
+    int y;
     for (int i = 0; i < d; i++)
     {
         for(int j = 0; j < d; j++)
         {
             if(board[i][j] == 0)
             {
-                blank = &board[i][j];
+                x = i;
+                y = j;
             }
         }
     }
@@ -206,24 +208,34 @@ bool move(int tile)
         {
             if(board[i][j] == tile)
             {
-                tile = board[i][j];
+                // if tile is above blank, return true    
+                if(i == x - 1 && j == y)
+                {
+                    return 1;
+                }                
+                // if tile is below blank, return true
+                else if(i == x + 1 && j == y)
+                {
+                    return 1;
+                }
+                // if tile is left of blank, return true
+                else if(i == x && j == y - 1)
+                {
+                    return 1;
+                }
+                // if tile is right of blank, return true
+                else if(i ==x && j == y + 1)
+                {
+                    return 1;
+                }
+                // else return false
+                else
+                return 0;
             }
         }
-    }
-        
-    // if tile is above empty, return true
-    
-    // if tile is below empty, return true
-    
-    // if tile is left of empty, return true
-    
-    // if tile is right of empty, return true
-    
-    // else return false
-    // else
-    return false;
-    
+    } 
     // remember location of blank tile at end
+    return false;
 }
 
 /**
