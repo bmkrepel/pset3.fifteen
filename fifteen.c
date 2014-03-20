@@ -168,6 +168,11 @@ void draw(void)
     {
         for(int j = 0; j < d; j++)
         {
+            if (board[i][j] == 0)
+            {
+                printf(" _");
+            }
+            else
             printf("%2i  ", board[i][j]);
         }
 
