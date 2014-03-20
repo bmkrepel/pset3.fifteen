@@ -39,6 +39,7 @@ int d;
 void clear(void);
 void greet(void);
 void init(void);
+void swap(int* a, int* b);
 void draw(void);
 bool move(int tile);
 bool won(void);
@@ -138,11 +139,25 @@ void init(void)
         for(int j = 0; j < d; j++)
         {
             board[i][j] = (d * d - 1) - j - (i * d);
-            printf("board[%i][%i] = %i\n", i, j, board[i][j]);
+            //printf("board[%i][%i] = %i\n", i, j, board[i][j]);
         }
+    }
+    // if odd number of tiles, swap #1 and #2
+    if(d % 2 != 1)
+    {
+        swap(&board[d - 1][d - 2], &board[d - 1][d - 3]);
     }
 }
 
+/**
+ * implements swap function
+ */
+void swap(int* a, int* b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
 /**
  * Prints the board in its current state.
  */
