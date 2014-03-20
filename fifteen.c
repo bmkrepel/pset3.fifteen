@@ -200,7 +200,17 @@ bool move(int tile)
     }
     
     // Search for tile's position
-    
+    for (int i = 0; i < d; i++)
+    {
+        for(int j = 0; j < d; j++)
+        {
+            if(board[i][j] == tile)
+            {
+                tile = board[i][j];
+            }
+        }
+    }
+        
     // if tile is above empty, return true
     
     // if tile is below empty, return true
