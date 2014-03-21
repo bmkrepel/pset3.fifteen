@@ -170,7 +170,7 @@ void draw(void)
         {
             if (board[i][j] == 0)
             {
-                printf(" _");
+                printf(" _  ");
             }
             else
             printf("%2i  ", board[i][j]);
@@ -211,21 +211,30 @@ bool move(int tile)
                 // if tile is above blank, return true    
                 if(i == x - 1 && j == y)
                 {
+                   
+                    swap(&board[i][j], &board[x][y]);
+                    x = i;
                     return 1;
                 }                
                 // if tile is below blank, return true
                 else if(i == x + 1 && j == y)
                 {
+                    swap(&board[i][j], &board[x][y]);
+                    x = i;
                     return 1;
                 }
                 // if tile is left of blank, return true
                 else if(i == x && j == y - 1)
                 {
+                    swap(&board[i][j], &board[x][y]);
+                    y = j;
                     return 1;
                 }
                 // if tile is right of blank, return true
                 else if(i ==x && j == y + 1)
                 {
+                    swap(&board[i][j], &board[x][y]);
+                    y = j;
                     return 1;
                 }
                 // else return false
