@@ -96,11 +96,11 @@ int main(int argc, string argv[])
         if (!move(tile))
         {
             printf("\nIllegal move.\n");
-            usleep(500000);
+            usleep(5000);
         }
 
         // sleep for animation's sake
-        usleep(500000);
+        usleep(5000);
     }
 
     // that's all folks
@@ -123,7 +123,7 @@ void greet(void)
 {
     clear();
     printf("GAME OF FIFTEEN\n");
-    usleep(2000000);
+    usleep(20000);
 }
 
 /**
@@ -254,14 +254,20 @@ bool move(int tile)
 bool won(void)
 {
     // iterate through array
-    for(i = 0; i < d; i++)
+    for(int i = 0; i < d; i++)
     {
-        for(j = 0; j < d; j++)
+        for(int j = 0; j < d; j++)
         {
-            if(board[i][j] < board[i][j+1])
+            if(board[0][0] == 0)
+            {
+                return 0;
+            }
+            else if(board[i][j] < board[i][j+1])
             {
                 won();
             }
+            else 
+            return 0;
         }
     }
     return false;
