@@ -253,7 +253,17 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
+    // iterate through array
+    for(i = 0; i < d; i++)
+    {
+        for(j = 0; j < d; j++)
+        {
+            if(board[i][j] < board[i][j+1])
+            {
+                won();
+            }
+        }
+    }
     return false;
 }
 
