@@ -254,15 +254,10 @@ bool won(void)
         for(int j = 0; j < d; j++)
         {
             
-            if(board[i][j] == winboard[i][j])
-            {
-                break;
-            }
-            else
+            if(board[i][j] != winboard[i][j])
             {
                 return 0;
             }
-            
         }
     }
     return 1;
