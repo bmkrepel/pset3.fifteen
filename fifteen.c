@@ -96,11 +96,11 @@ int main(int argc, string argv[])
         if (!move(tile))
         {
             printf("\nIllegal move.\n");
-            usleep(5000);
+            usleep(250000);
         }
 
         // sleep for animation's sake
-        usleep(5000);
+        usleep(250000);
     }
 
     // that's all folks
@@ -258,19 +258,18 @@ bool won(void)
     {
         for(int j = 0; j < d; j++)
         {
-            if(board[0][0] == 0)
+            if(board[d][d] != 0)
             {
                 return 0;
             }
-            else if(board[i][j] < board[i][j+1])
+            else if(board[i][j] > board[i][j+1])
             {
-                won();
+                return 0;
             }
-            else 
-            return 0;
         }
+        
     }
-    return false;
+    return 1;
 }
 
 /**
