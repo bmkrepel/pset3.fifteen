@@ -155,7 +155,7 @@ void init(void)
         }
     }
 
-    winboard[d][d] = 0;
+    winboard[d - 1][d- 1] = 0;
     
     // if odd number of tiles, swap #1 and #2    
     if(d % 2 != 1)
@@ -242,25 +242,26 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // check that blank tile is in correct location
-    if(board[d - 1][d - 1] != 0)
-    {
-         return 0;
-    }
     
+    int wincheck = 0;
     // iterate through array
     for(int i = 0; i < d; i++)
     {
         for(int j = 0; j < d; j++)
         {
             
-            if(board[i][j] != winboard[i][j])
+            if(board[i][j] == winboard[i][j])
             {
-                return 0;
-            }
+                wincheck++;
+            }    
+            if(wincheck == (d * d))
+            {
+                return 1;
+            }            
         }
     }
-    return 1;
+
+    return false;
 }
 
 /**
