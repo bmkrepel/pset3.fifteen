@@ -38,6 +38,9 @@ int d;
 // blank coordinates
 int x, y;
 
+// winning board, whereby winboard[i][j] represents row i and column j
+int winboard[MAX][MAX];
+
 // prototypes
 void clear(void);
 void greet(void);
@@ -136,16 +139,25 @@ void greet(void)
  */
 void init(void)
 {
+    
+    int counter = 1;
+    
     // create 2D array of (d^2-1) tiles in order from highest to lowest
     for(int i = 0; i < d; i++)
     {
         for(int j = 0; j < d; j++)
         {
             board[i][j] = (d * d - 1) - j - (i * d);
-            //printf("board[%i][%i] = %i\n", i, j, board[i][j]);
+            // printf("board[%i][%i] = %i\n", i, j, board[i][j]);
+            winboard[i][j] = counter;
+            counter++;
+            // printf("winboard[%i][%i] = %i\n", i, j, winboard[i][j]);            
         }
     }
-    // if odd number of tiles, swap #1 and #2
+
+    winboard[d][d] = 0;
+    
+    // if odd number of tiles, swap #1 and #2    
     if(d % 2 != 1)
     {
         swap(&board[d - 1][d - 2], &board[d - 1][d - 3]);
@@ -171,9 +183,11 @@ void draw(void)
     {
         for(int j = 0; j < d; j++)
         {
+            // print _ for blank tile and remember location
             if (board[i][j] == 0)
             {
                 printf(" _  ");
+            
                 x = i;
                 y = j;
             }
@@ -199,12 +213,10 @@ bool move(int tile)
             if(board[i][j] == tile)
             {
                 // if tile is adjacent to blank, return true    
-                if( 
-                    (i == x - 1 && j == y) ||
+                if( (i == x - 1 && j == y) ||
                     (i == x + 1 && j == y) ||
                     (i == x && j == y - 1) ||
-                    (i ==x && j == y + 1)
-                  )
+                    (i ==x && j == y + 1) )
                 {
                     
                     // swap tiles
@@ -230,21 +242,28 @@ bool move(int tile)
  */
 bool won(void)
 {
+    // check that blank tile is in correct location
+    if(board[d - 1][d - 1] != 0)
+    {
+         return 0;
+    }
+    
     // iterate through array
     for(int i = 0; i < d; i++)
     {
         for(int j = 0; j < d; j++)
         {
-            if(board[d][d] != 0)
+            
+            if(board[i][j] == winboard[i][j])
+            {
+                break;
+            }
+            else
             {
                 return 0;
             }
-            else if(board[i][j] > board[i][j+1])
-            {
-                return 0;
-            }
+            
         }
-        
     }
     return 1;
 }
