@@ -35,6 +35,9 @@ int board[MAX][MAX];
 // board's dimension
 int d;
 
+// blank coordinates
+int x, y;
+
 // prototypes
 void clear(void);
 void greet(void);
@@ -171,6 +174,8 @@ void draw(void)
             if (board[i][j] == 0)
             {
                 printf(" _  ");
+                x = i;
+                y = j;
             }
             else
             printf("%2i  ", board[i][j]);
@@ -186,21 +191,6 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // Remember location of blank tile
-    int x;
-    int y;
-    for (int i = 0; i < d; i++)
-    {
-        for(int j = 0; j < d; j++)
-        {
-            if(board[i][j] == 0)
-            {
-                x = i;
-                y = j;
-            }
-        }
-    }
-    
     // Search for tile's position
     for (int i = 0; i < d; i++)
     {
@@ -208,32 +198,20 @@ bool move(int tile)
         {
             if(board[i][j] == tile)
             {
-                // if tile is above blank, return true    
-                if(i == x - 1 && j == y)
+                // if tile is adjacent to blank, return true    
+                if( 
+                    (i == x - 1 && j == y) ||
+                    (i == x + 1 && j == y) ||
+                    (i == x && j == y - 1) ||
+                    (i ==x && j == y + 1)
+                  )
                 {
-                   
+                    
+                    // swap tiles
                     swap(&board[i][j], &board[x][y]);
+                    
+                    // remember new location of blank tile
                     x = i;
-                    return 1;
-                }                
-                // if tile is below blank, return true
-                else if(i == x + 1 && j == y)
-                {
-                    swap(&board[i][j], &board[x][y]);
-                    x = i;
-                    return 1;
-                }
-                // if tile is left of blank, return true
-                else if(i == x && j == y - 1)
-                {
-                    swap(&board[i][j], &board[x][y]);
-                    y = j;
-                    return 1;
-                }
-                // if tile is right of blank, return true
-                else if(i ==x && j == y + 1)
-                {
-                    swap(&board[i][j], &board[x][y]);
                     y = j;
                     return 1;
                 }
@@ -243,7 +221,6 @@ bool move(int tile)
             }
         }
     } 
-    // remember location of blank tile at end
     return false;
 }
 
