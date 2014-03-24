@@ -1,5 +1,7 @@
 /**
  * fifteen.c
+ * Brandon Krepel
+ * bmkrepel@gmail.com
  *
  * Computer Science 50
  * Problem Set 3
@@ -35,7 +37,7 @@ int board[MAX][MAX];
 // board's dimension
 int d;
 
-// blank coordinates
+// coordinates to track blank tile
 int x, y;
 
 // winning board, whereby winboard[i][j] represents row i and column j
@@ -151,10 +153,9 @@ void init(void)
             // printf("board[%i][%i] = %i\n", i, j, board[i][j]);
             winboard[i][j] = counter;
             counter++;
-            // printf("winboard[%i][%i] = %i\n", i, j, winboard[i][j]);            
         }
     }
-
+    // initialize winboard's lower left corner to zero
     winboard[d - 1][d- 1] = 0;
     
     // if odd number of tiles, swap #1 and #2    
@@ -183,7 +184,7 @@ void draw(void)
     {
         for(int j = 0; j < d; j++)
         {
-            // print _ for blank tile and remember location
+            // print _ for blank tile and remember coordinates
             if (board[i][j] == 0)
             {
                 printf(" _  ");
@@ -218,8 +219,7 @@ bool move(int tile)
                     (i == x && j == y - 1) ||
                     (i ==x && j == y + 1) )
                 {
-                    
-                    // swap tiles
+                    // swap tile with blank
                     swap(&board[i][j], &board[x][y]);
                     
                     // remember new location of blank tile
@@ -227,7 +227,7 @@ bool move(int tile)
                     y = j;
                     return 1;
                 }
-                // else return false
+                // return false for invalid move
                 else
                 return 0;
             }
@@ -249,18 +249,19 @@ bool won(void)
     {
         for(int j = 0; j < d; j++)
         {
-            
+            // for each tile in the proper location, increase win counter
             if(board[i][j] == winboard[i][j])
             {
                 wincheck++;
             }    
+            
+            // if win counter is equal to number of tiles, return 1
             if(wincheck == (d * d))
             {
                 return 1;
             }            
         }
     }
-
     return false;
 }
 
